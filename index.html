@@ -33,7 +33,7 @@ header {
 }
 .header-left a i { font-size: 24px; }
 .header-center { font-size: 28px; font-weight: bold; }
-.top-select { display: flex; justify-content: flex-start; margin: 20px 40px; }
+.top-select { display: flex; justify-content: flex-start; margin: 20px 190px; }
 select {
   padding: 8px 14px;
   font-size: 18px;
@@ -42,23 +42,35 @@ select {
   background-color: #e3fdfd;
 }
 .exercise {
-  width: 85%;
+  width: 70%;
   margin: 20px auto;
   text-align: left;
   font-size: 22px;
 }
-.question-box, .note-box, .option-note {
+.question-box {
   width: 100%;
+  min-height: 60px;
   border: 2px solid #a0e7e5;
   border-radius: 8px;
   padding: 10px;
   margin: 10px 0;
-  font-size: 20px;
+  font-size: 24px;
+ font-weight: bold;
   background-color: #e3fdfd;
   resize: vertical;
 }
-.question-box { min-height: 60px; }
-.note-box, .option-note { min-height: 50px; }
+.note-box {
+  width: 100%;
+  min-height: 50px; /* giữ box lớn cho ghi chú */
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 20px;
+font-family: 'Arial', sans-serif;  /* đổi font chữ */
+  color: #FF0000;
+  background-color: #D9E9CF;
+  resize: vertical;
+}
 .option-row {
   display: flex;
   align-items: center;
@@ -71,6 +83,20 @@ select {
 .option-label {
   flex: 0 0 auto;
   margin-right: 15px;
+}
+.option-note {
+  flex: 1;
+  margin-left: 15px;
+  min-height: 20px;  /* giảm chiều cao cho box nhỏ */
+  max-height: 30px;
+  border: 1px solid #a0e7e5;
+  border-radius: 6px;
+  padding: 5px;
+  color: #4B70F5;
+  background-color: #F1F3E0;
+  font-size: 20px;
+  font-family: 'Arial', sans-serif;  /* đổi font chữ */
+  resize: vertical;
 }
 .exercise-buttons {
   margin-top: 15px;
@@ -120,7 +146,12 @@ select {
 
 <div class="top-select">
   <select id="exerciseList">
-    <option value="1">TOEIC Part 5</option>
+    <option value="1">TOEIC Part 5 - Test 1</option>
+    <option value="1">TOEIC Part 5 - Test 2</option>
+    <option value="1">TOEIC Part 5 - Test 3</option>
+    <option value="1">TOEIC Part 5 - Test 4</option>
+    <option value="1">TOEIC Part 5 - Test 5</option>
+
   </select>
 </div>
 
@@ -132,18 +163,129 @@ select {
 // Dữ liệu mẫu TOEIC
 const exercises = {
   1: [
-    {
-      q: "Ms. Morgan recruited the individuals that the company _____ for the next three months.",
-      options: ["will employ", "to employ", "has been employed", "employ"],
-      correct: 0, // index
-      explain: "Chọn 'will employ' vì câu nói về tương lai: 'the company will employ'."
-    },
-    {
-      q: "The manager requested that all reports _____ by Friday.",
-      options: ["is submitted", "be submitted", "submitted", "submitting"],
-      correct: 1,
-      explain: "Trong mệnh đề sau 'requested that', dùng subjunctive 'be submitted'."
-    }
+{
+    q: "101. Sophia Hollinger was commended for ------ work on the Kala account.",
+    options: ["her", "she", "hers", "herself"],
+    correct: 0,
+    explain: "Chọn tính từ sở hữu 'her' để đứng trước danh từ 'work'."
+  },
+  {
+    q: "102. Last summer, jazz musician Jay Deswani ------ on the main concert stage at Waterfront Park.",
+    options: ["located", "requested", "supplied", "performed"],
+    correct: 3,
+    explain: "Dựa vào ngữ cảnh nhạc sĩ (musician), chọn 'performed' (biểu diễn)."
+  },
+  {
+    q: "103. The purchasing department ordered six ------ cases of ink toner.",
+    options: ["add", "additional", "additionally", "adding"],
+    correct: 1,
+    explain: "Chọn tính từ 'additional' (thêm vào) để bổ nghĩa cho danh từ 'cases'."
+  },
+  {
+    q: "104. Please complete the questionnaire to help our team ------ understand the financial services you are interested in.",
+    options: ["better", "more", "very", "surely"],
+    correct: 0,
+    explain: "Cụm từ 'better understand' dùng để chỉ việc hiểu rõ hơn/tốt hơn về vấn đề gì đó."
+  },
+  {
+    q: "105. ------ of the garments will begin two weeks after the contract is signed.",
+    options: ["Product", "Produce", "Produced", "Production"],
+    correct: 3,
+    explain: "Đứng đầu câu làm chủ ngữ cần một danh từ, 'Production' (việc sản xuất) là phù hợp nhất."
+  },
+  {
+    q: "106. The minutes of last week’s board meeting had only three ------ errors.",
+    options: ["junior", "minor", "soft", "light"],
+    correct: 1,
+    explain: "Cụm từ 'minor errors' dùng để chỉ các lỗi nhỏ, không đáng kể."
+  },
+  {
+    q: "107. Patrons are asked to silence their phones ------ the show begins.",
+    options: ["when", "which", "what", "why"],
+    correct: 0,
+    explain: "Sử dụng liên từ chỉ thời gian 'when' (khi) để nối hai mệnh đề."
+  },
+  {
+    q: "108. The majority of the company’s employees commute to work ------ train.",
+    options: ["on", "by", "in", "from"],
+    correct: 1,
+    explain: "Sử dụng giới từ 'by' + phương tiện giao thông (by train: bằng tàu hỏa)."
+  },
+
+{
+    q: "109. Line 73 is the oldest ------- operating bus line in Raymo City’s history.",
+    options: ["continues", "continued", "continuous", "continuously"],
+    correct: 3,
+    explain: "Chọn trạng từ 'continuously' để bổ nghĩa cho động từ/tính từ 'operating'."
+  },
+  {
+    q: "110. This message is a ------- to pick up your package at your local post office as soon as possible.",
+    options: ["promotion", "reminder", "process", "report"],
+    correct: 1,
+    explain: "Dựa vào nghĩa: 'reminder' (lời nhắc nhở) phù hợp với việc đi lấy bưu kiện."
+  },
+  {
+    q: "111. Pet Orbit customers ------- want receipts delivered by e-mail can opt for this service.",
+    options: ["whose", "who", "those", "whoever"],
+    correct: 1,
+    explain: "Dùng đại từ quan hệ 'who' thay thế cho danh từ chỉ người 'customers'."
+  },
+  {
+    q: "112. Mr. Takajian may be an entry-level employee, ------- he does not hesitate to take initiative.",
+    options: ["but", "or", "equally", "accordingly"],
+    correct: 0,
+    explain: "Dùng liên từ 'but' để thể hiện sự đối lập giữa nhân viên mới và sự chủ động."
+  },
+  {
+    q: "113. Carter Department Store allows customers ------- items on hold for up to 24 hours.",
+    options: ["place", "to place", "placing", "to be placed"],
+    correct: 1,
+    explain: "Cấu trúc: allow someone to do something (cho phép ai làm gì)."
+  },
+  {
+    q: "114. Using unique colors and styles, the decor experts at Mamie’s Interiors bring a ------- look to homes.",
+    options: ["brief", "dependent", "motivational", "fashionable"],
+    correct: 3,
+    explain: "Tính từ 'fashionable' (thời thượng) phù hợp để mô tả phong cách trang trí nhà cửa."
+  },
+  {
+    q: "115. ------- efficient project management, Sparksware’s latest software program was released on time.",
+    options: ["Along with", "Regarding", "Because of", "Subsequent"],
+    correct: 2,
+    explain: "Dùng 'Because of' để chỉ nguyên nhân: 'Nhờ có sự quản lý dự án hiệu quả...'"
+  },
+  {
+    q: "116. The summer line of outdoor furniture will be available ------- select stores as early as February.",
+    options: ["until", "at", "over", "before"],
+    correct: 1,
+    explain: "Giới từ 'at' đi với địa điểm (at stores: tại các cửa hàng)."
+  },
+  {
+    q: "117. There has been a ------- decrease in requests for customer support this quarter.",
+    options: ["notice", "noticing", "noticeable", "noticeably"],
+    correct: 2,
+    explain: "Cần một tính từ 'noticeable' (đáng chú ý) để bổ nghĩa cho danh từ 'decrease'."
+  },
+  {
+    q: "118. Bina Dal always wanted to become a diplomat, ------- she studied international relations at university.",
+    options: ["so", "once", "overall", "whereas"],
+    correct: 0,
+    explain: "Dùng liên từ 'so' (vì vậy) để chỉ kết quả của mong muốn làm nhà ngoại giao."
+  },
+  {
+    q: "119. Thank you for responding ------- with information about the T-Max 400 printer and scanner.",
+    options: ["prompt", "promptly", "prompted", "prompts"],
+    correct: 1,
+    explain: "Chọn trạng từ 'promptly' (nhanh chóng) để bổ nghĩa cho động từ 'responding'."
+  },
+  {
+    q: "120. Owing to the weather, we need to ------- your appointment for tree removal service.",
+    options: ["reschedule", "borrow", "contain", "reconstruct"],
+    correct: 0,
+    explain: "Dựa vào ngữ cảnh thời tiết xấu, chọn 'reschedule' (thay đổi lịch hẹn)."
+  },
+
+
   ]
 };
 
@@ -159,18 +301,18 @@ function loadQuestion(){
   const ex = exercises[1][currIndex];
   let html = `
     <div class="question-box">${ex.q}</div>
-    <textarea class="note-box"></textarea>
+    <textarea class="note-box" placeholder="Note:"></textarea>
   `;
   ex.options.forEach((opt,i)=>{
     html += `
       <div class="option-row">
         <input type="radio" name="opt" id="opt${i}" value="${i}">
         <label class="option-label" for="opt${i}">${String.fromCharCode(65+i)}. ${opt}</label>
-        <textarea class="option-note"></textarea>
+        <textarea class="option-note" placeholder=""></textarea>
       </div>
     `;
   });
-  html += `<textarea class="note-box"></textarea>`;
+  html += `<textarea class="note-box" placeholder="Note:"></textarea>`;
   html += `
     <div class="exercise-buttons">
       <button onclick="checkAnswer()">Check</button>
