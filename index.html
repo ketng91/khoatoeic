@@ -53,9 +53,9 @@ select {
 }
 body, html { overflow-x: hidden; }
 .question-box {
-  width: 100%; min-height: 60px; border: 2px solid #a0e7e5;
+  width: 100%; min-height: 60px; 
   border-radius: 8px; padding: 10px; margin: 10px 0;
-  font-size: 25px; font-weight: bold; background-color: #e3fdfd;
+  font-size: 25px; font-weight: bold; background-color: #B7E5CD;
 }
 .option-row { 
   display: flex; 
@@ -77,7 +77,7 @@ body, html { overflow-x: hidden; }
   padding: 6px 10px;
   font-size: 22px;
   color: #FF0000;               /* đỏ đậm hơn chút cho dễ đọc */
-  background-color: #F1F3E0;     /* xanh lá rất nhạt */
+  background-color: #FCF8F8;     /* xanh lá rất nhạt */
   border: 1px solid #b3e6b3;
   border-radius: 6px;
   resize: vertical;
@@ -91,6 +91,11 @@ body, html { overflow-x: hidden; }
   border-radius: 8px; border: none; margin-right: 15px;
   cursor: pointer; background-color: #a0e7e5;
 }
+
+.exercise-buttons button:nth-child(2) {
+  background-color: #FEEE91;  
+}
+
 .exercise-buttons button:hover { background-color: #ffb3ba; }
 
 /* Textarea lớn ở dưới cùng - cùng kích cỡ với question-box */
@@ -100,7 +105,7 @@ body, html { overflow-x: hidden; }
   padding: 12px;
   font-size: 22px;
   color: #FF0000;
-  background-color: #D9E9CF;
+  background-color: #FCF8F8;
   border: 2px solid #b3e6b3;
   border-radius: 8px;
   resize: vertical;
@@ -2032,6 +2037,9 @@ let currentTest = 1;
 function loadExercise(testNumber) {
   currentTest = testNumber;
   currentIndex = 0;
+  
+  resetTimer();   // ⭐ reset time mỗi lần đổi topic
+
   renderQuestion();
 }
 
@@ -2056,9 +2064,11 @@ function renderQuestion() {
       `).join("")}
       <div class="result" id="result"></div>
       <div class="exercise-buttons">
-        <button onclick="checkAnswer()">Check</button>
-        <button onclick="nextQuestion()">Next</button>
-      </div>
+ <button onclick="prevQuestion()">Back</button>
+ <button onclick="checkAnswer()">Check</button>
+  <button onclick="nextQuestion()">Next</button>
+</div>
+
     </div>
   `;
   area.innerHTML = html;
@@ -2094,6 +2104,14 @@ function nextQuestion() {
   }
   renderQuestion();
 }
+
+
+function prevQuestion() {
+  if (currentIndex === 0) return;  // đang ở câu đầu thì khỏi lùi
+  currentIndex--;
+  renderQuestion();
+}
+
 
 // ===== FIRST LOAD + LISTENER =====
 loadExercise(Number(document.getElementById("exerciseList").value));
