@@ -113,6 +113,12 @@ body, html { overflow-x: hidden; }
   font-family: Arial, sans-serif;
   box-sizing: border-box;
 }
+
+.exercise-buttons span {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
 </style>
 </head>
 <body>
@@ -2063,10 +2069,13 @@ function renderQuestion() {
         </div>
       `).join("")}
       <div class="result" id="result"></div>
-      <div class="exercise-buttons">
+<div class="exercise-buttons">
  <button onclick="prevQuestion()">Back</button>
  <button onclick="checkAnswer()">Check</button>
-  <button onclick="nextQuestion()">Next</button>
+ <button onclick="nextQuestion()">Next</button>
+ <span style="margin-left:12px; font-size:18px; color:#c62828;">
+   Đăng ký khoá TOEIC 2/4 kn, Khoá giải đề ibx thầy nhé.
+ </span>
 </div>
 
     </div>
